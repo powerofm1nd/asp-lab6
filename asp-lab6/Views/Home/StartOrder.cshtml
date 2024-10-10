@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Start Order";
+}
+
+@if (!string.IsNullOrEmpty((string?)ViewData["ErrorMessage"]))
+{
+    var errorMessage = ViewData["ErrorMessage"] as string;
+    <div class="error-message">@errorMessage</div>
+    <div>
+        <a asp-action="Index">Return to enter your data again...</a>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <h3>Enter the number of product types to order: </h3>
+        <br/><br/>
+        <form asp-action="CreateOrder" method="get">
+            <label>Quantity: </label>
+            <input name="quantityOfProductTypes" type="number" value="1" min="1" max="@((ViewData["AvailableProducts"] as IReadOnlyCollection<ProductModel>).Count)"/>
+            <br/><br/>
+            <input type="submit" value="Create order"/>
+            <br/><br/>
+            <input type="hidden" name='userGuid' value="@ViewData["newUserGuid"]"/>
+        </form>
+    </div>
+}

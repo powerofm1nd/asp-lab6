@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Your order";
+    var order = @Model as OrderModel;
+}
+
+<div class="text-center">
+    <h3>Dear @order.Customer.FirstName, your order has been created!</h3>
+    <br/>
+    <table>
+        <thead>
+        <tr>
+            <td>Product name</td>
+            <td>Count</td>
+            <td>Price per 1 pcs</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var orderItem in order.Products)
+        {
+            <tr>
+                <td>@orderItem.Product.Name</td>
+                <td>@orderItem.Quantity</td>
+                <td>@orderItem.Product.Price.ToString("C")</td>
+            </tr>
+        }
+        </tbody>
+        
+        <tfoot>
+        <tr>
+            <td></td>
+            <td>Total price:</td>
+            <td>@(((double)ViewData["totalPrice"]).ToString("C"))</td>
+        </tr>
+        </tfoot>
+    </table>
+    
+    <br/>
+    <br/>
+    
+    @if (!string.IsNullOrEmpty((string?)ViewData["warningMessage"]))
+    {
+        <h5>Warning: @ViewData["warningMessage"]</h5>
+        <h5>Please contact us to confirm your order!</h5>
+    }
+</div>
+

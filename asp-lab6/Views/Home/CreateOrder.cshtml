@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Create Order";
+}
+
+<div class="text-center">
+    <h3>Select product and enter the count to order: </h3>
+    <br/><br/>
+    <form asp-action="CreateOrder" method="get">
+        
+        <label>Product type: </label>
+        <select name="currentProductId">
+            @foreach (ProductModel product in (ViewData["AvailableProducts"] as List<ProductModel>))
+            {
+                <option value="@product.id">@product.Name - Price: @product.Price.ToString("C") -  @product.AvailableQuantity pcs</option>
+            }
+        </select>
+        
+        <br/><br/>
+        
+        <label>Quantity: </label>
+        <input name="quantityOfCurrentProduct" type="number" value="0" min="0"/>
+
+        <br/><br/>
+
+
+        
+        @if ((int)ViewData["currentNumberOfForm"] == (int)ViewData["quantityOfProductTypes"])
+        {
+            <input type="submit"  value="Create order" />
+        }
+        else
+        {
+            <input type="submit"  value="Go to the next form" />
+        }
+
+        <input name="orderId" type="hidden" value="@ViewData["OrderId"]"/>
+        <input name="currentNumberOfForm" type="hidden" value="@ViewData["currentNumberOfForm"]"/>
+        <input name="quantityOfProductTypes" type="hidden" value="@ViewData["quantityOfProductTypes"]"/>
+    </form>
+</div>
+

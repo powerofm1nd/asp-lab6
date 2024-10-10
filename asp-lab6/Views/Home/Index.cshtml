@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h3>Enter your information: </h3>
+    <br/><br/>
+    <form asp-action="StartOrder" method="get">
+        <label>First name: </label>
+        <input name="firstName" type="text" value="Bob" maxlength="50"/>
+        <br/><br/>
+        <label>Last name: </label>
+        <input name="lastName" type="text" value="Pumpkin" maxlength="50"/>
+        <br/><br/>
+        <label>Age: </label>
+        <input name="age" type="number" value="20" min="0" max="120"/>
+        <br/><br/>
+        <input type="submit" value="Start order"/>
+    </form>
+</div>
